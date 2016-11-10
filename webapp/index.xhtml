@@ -58,55 +58,16 @@
                     </p:column>
                     
                     <p:column style="text-align: center">
-                        <p:commandButton icon="ui-icon-pencil" type="button" update="" oncomplete="">
-                            <f:setPropertyActionListener value="#{contacto}" target="#{contactoBean.contacto}" />
+                        <p:commandButton icon="ui-icon-pencil">
+                            
                         </p:commandButton>
-                        <p:commandButton icon="ui-icon-trash" update="" oncomplete="">
-                            <f:setPropertyActionListener value="#{contacto}" target="#{contactoBean.contacto}" />
+               
+                        <p:commandButton icon="ui-icon-close" title="remove from cart" 
+                            actionListener="#{contactoBean.eliminarContacto(contacto)}" update="datatable">
                         </p:commandButton>
                     </p:column>                    
                 </p:dataTable>
             </p:panel>  
-            
-            <p:dialog header="Contacto Detail" showEffect="fade" widgetVar="modificar" modal="true" resizable="false">
-                <h:panelGrid id="modificarContacto" columns="2" cellpadding="8">
-                    <h:outputText value="Id:"/>
-                    <p:inputText value="#{contactoBean.contacto.id}" disabled="true"/>
-                    
-                    <h:outputText value="Nombre:"/>
-                    <p:inputText value="#{contactoBean.contacto.nombre}"/>
-                    
-                    <h:outputText value="Apellido:"/>
-                    <p:inputText value="#{contactoBean.contacto.apellido}"/>
-                    
-                    <h:outputText value="UserName:"/>
-                    <p:inputText value="#{contactoBean.contacto.username}"/>
-                    
-                    <h:outputText value="Email:"/>
-                    <p:inputText value="#{contactoBean.contacto.email}"/>
-                    
-                    <h:outputText value="Dirección:"/>
-                    <p:inputText value="#{contactoBean.contacto.direccion}"/>
-                    
-                    <h:outputText value="Telefono"/>
-                    <p:inputMask value="#{contactoBean.contacto.telefono}" mask="(99) 999-999"/>
-                    
-                    <h:outputText value="Fecha Creacion:"/>
-                    <p:inputText value="#{contactoBean.contacto.fecha_creacion}" disabled="true"/>
-                    
-                    <p:commandButton value="Modificar Contacto" icon="ui-icon-check"
-                                     action="#{contactoBean.modificarContacto()}" 
-                                     update="panel, msg" />
-                </h:panelGrid>
-            </p:dialog>
-            
-            
-            <p:confirmDialog id="eliminarConctacto" widgetVar="eliminarContactoW" header="Elliminar Contacto"
-                message="Desea realmente elimiar el contacto #{contactoBean.contacto.nombre}?"
-                severity="alert" >
-                <p:commandButton value="Si" icon="ui-icon-check" action="#{contactoBean.eliminarContacto()}"
-                    oncomplete="eliminarContactoW.hide()" update="datatable, msg" />
-            </p:confirmDialog>
             
         </h:form>
     </h:body>

@@ -24,27 +24,35 @@ public class ContactoBean implements Serializable {
     private static final long serialVersionUID = 455659950717243338L;
     private Contacto contacto = new Contacto();
     private List<Contacto> contactos = new ArrayList<Contacto>();
+    private int id = 1;
     
     public ContactoBean() {
         //cargar lista de contactos
         //falta implementar
+        contactos.add(new Contacto(getUltimoId(),"Fernando","Lopez","@ferpiece","flopez@gomail.com","Lucerito","(84)401-286)"));
+        contactos.add(new Contacto(getUltimoId(),"Fernando","Lopez","@ferpiece","flopez@gomail.com","Lucerito","(84)401-286)"));
+        contactos.add(new Contacto(getUltimoId(),"Fernando","Lopez","@ferpiece","flopez@gomail.com","Lucerito","(84)401-286)"));
+        contactos.add(new Contacto(getUltimoId(),"Fernando","Lopez","@ferpiece","flopez@gomail.com","Lucerito","(84)401-286)"));
+        contactos.add(new Contacto(getUltimoId(),"Fernando","Lopez","@ferpiece","flopez@gomail.com","Lucerito","(84)401-286)"));
+        contactos.add(new Contacto(getUltimoId(),"Fernando","Lopez","@ferpiece","flopez@gomail.com","Lucerito","(84)401-286)"));
     }
     
     public void agregarContacto(){
         //falta implementar
+        int id = getUltimoId();
+        contacto.setId(id);
         contactos.add(contacto);
         showMessage("Contacto " + contacto.getNombre() + " agregado con exito!");
     }
     
-    public void eliminarContacto(){
-        //falta implementar
+    public void eliminarContacto(Contacto contacto){
+        String nombre = contacto.getNombre();
         contactos.remove(contacto);
-        showMessage("Contacto " + contacto.getNombre() + " eliminado con exito!");
+        showMessage("Contacto " + nombre + " eliminado con exito!");
     }
     
     public void modificarContacto(){
         //falta implementar
-        
         showMessage("Contacto " + contacto.getNombre() + " modificado con exito!");
     }
     
@@ -76,5 +84,10 @@ public class ContactoBean implements Serializable {
     public Contacto getNullContacto(){
         return new Contacto();
     }
+
+    private int getUltimoId() {
+        return this.id++;
+    }
+
     
 }
