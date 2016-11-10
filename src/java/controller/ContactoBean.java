@@ -44,6 +44,7 @@ public class ContactoBean implements Serializable {
     
     public void modificarContacto(){
         //falta implementar
+        
         showMessage("Contacto " + contacto.getNombre() + " modificado con exito!");
     }
     
