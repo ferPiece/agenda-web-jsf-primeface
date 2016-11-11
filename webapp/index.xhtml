@@ -21,54 +21,108 @@
             
             <p:panel>
                 <p:dataTable id="datatable" value="#{contactoBean.contactos}" var="contacto"
-                             paginator="true" rows="5">
+                             paginator="true" rows="5" editable="true">
                     
                     <f:facet name="header">Lista de Contactos</f:facet>
                     
-                    <p:column headerText="Id" style="text-align: center">
+                    <p:ajax event="rowEdit" listener="#{contactoBean.modificarContacto}" update=":form:msg"/>
+                    <p:ajax event="rowEdit" listener="#{contactoBean.cancelarModificarContacto}" update=":form:msg"/>
+                    
+                    <p:column headerText="Id" style="text-align: center" width="20">
                         <h:outputText value="#{contacto.id}"/>
                     </p:column>
                     
                     <p:column headerText="Nombre" style="text-align: center">
-                        <h:outputText value="#{contacto.nombre}"/>
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{contacto.nombre}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{contactoBean.contactoUpdate.nombre}"/>
+                            </f:facet>
+                        </p:cellEditor>
                     </p:column>
 
                     <p:column headerText="Apellido" style="text-align: center">
-                        <h:outputText value="#{contacto.apellido}"/>
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{contacto.apellido}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{contactoBean.contactoUpdate.apellido}"/>
+                            </f:facet>
+                        </p:cellEditor>
                     </p:column>
 
                     <p:column headerText="Username" style="text-align: center">
-                        <h:outputText value="#{contacto.username}"/>
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{contacto.username}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{contactoBean.contactoUpdate.username}"/>
+                            </f:facet>
+                        </p:cellEditor>
                     </p:column>
                     
-                    <p:column headerText="Email" style="text-align: center">
-                        <h:outputText value="#{contacto.email}"/>
+                    <p:column headerText="Email" style="text-align: center" rendered="true">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{contacto.email}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{contactoBean.contactoUpdate.email}"/>
+                            </f:facet>
+                        </p:cellEditor>
                     </p:column>
                     
                     <p:column headerText="Dirección" style="text-align: center">
-                        <h:outputText value="#{contacto.direccion}"/>
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{contacto.direccion}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{contactoBean.contactoUpdate.direccion}"/>
+                            </f:facet>
+                        </p:cellEditor>
                     </p:column>
                     
                     <p:column headerText="Telefono" style="text-align: center">
-                        <h:outputText value="#{contacto.telefono}"/>
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{contacto.telefono}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputMask value="#{contactoBean.contactoUpdate.telefono}" mask="(99) 999-999"/>
+                            </f:facet>
+                        </p:cellEditor>
                     </p:column>
                     
-                    <p:column headerText="Fechar Creacion" style="text-align: center">
+                    <p:column headerText="Fecha Creación" style="text-align: center">
                         <h:outputText value="#{contacto.fecha_creacion}"/>
                     </p:column>
                     
-                    <p:column style="text-align: center">
-                        <p:commandButton icon="ui-icon-pencil">
-                            
-                        </p:commandButton>
-               
+                    <p:column width="20">
+                        <p:rowEditor/>
+                    </p:column>
+                    
+                    <p:column style="text-align: center" width="40">               
                         <p:commandButton icon="ui-icon-close" title="remove from cart" 
                             actionListener="#{contactoBean.eliminarContacto(contacto)}" update="datatable">
                         </p:commandButton>
-                    </p:column>                    
+                    </p:column>
                 </p:dataTable>
             </p:panel>  
             
+            <p:dialog id="modificarDialog" header="Modificar Contacto Papuu" 
+                      widgetVar="modificarContacto" resizable="false" modal="true">
+                <h:panelGrid id="modificarForm" columns="2" cellpadding="4" style="margin:0 auto;">
+                    <p:commandButton value="Modificar" icon="ui-icon-check"
+                    action="#{contactoBean.eliminarContacto(contacto)}" 
+                    oncomplete="modificarWidget.hide()" update="datatable, msg"/>
+                </h:panelGrid>
+            </p:dialog>
+                       
         </h:form>
     </h:body>
 </html>
