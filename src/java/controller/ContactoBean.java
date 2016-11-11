@@ -12,14 +12,23 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.Produces;
 import model.Contacto;
 import org.primefaces.event.RowEditEvent;
 /**
  *
  * @author lopez
  */
+
+
+
 @ManagedBean
 @SessionScoped
+@Path("/contacto")
 public class ContactoBean implements Serializable {
 
     private static final long serialVersionUID = 455659950717243338L;
@@ -27,10 +36,6 @@ public class ContactoBean implements Serializable {
     private Contacto contactoUpdate = new Contacto();
     private List<Contacto> contactos = new ArrayList<Contacto>();
     private int id = 1;
-    
-    
-    
-    
     
     public ContactoBean() {
         //cargar lista de contactos
@@ -41,6 +46,16 @@ public class ContactoBean implements Serializable {
         contactos.add(new Contacto(getUltimoId(),"Nicolas","Lopez","@unloco","nichito93@gmail.com","San Lorenzo","(72)213-929"));
     }
     
+    
+    @GET
+    @Produces("text/plain")
+    @Path("/buscar/{id}")
+    public Contacto getContacto(@QueryParam("id") int idContacto) {
+        Contacto contacto = contactos.get(idContacto);
+        return contacto;
+    }
+    
+    
     public void agregarContacto(){
         int id = getUltimoId();
         contacto.setId(id);
@@ -48,7 +63,9 @@ public class ContactoBean implements Serializable {
         showMessage("Contacto " + contacto.getNombre() + " agregado con exito!");
     }
     
-    public void eliminarContacto(Contacto contacto){
+    @DELETE
+    @Path("/delete/{idc}")
+    public void eliminarContacto(@QueryParam("idc") Contacto contacto){
         String nombre = contacto.getNombre();
         contactos.remove(contacto);
         showMessage("Contacto " + nombre + " eliminado con exito!");
@@ -98,10 +115,6 @@ public class ContactoBean implements Serializable {
     private void showMessage(String mensaje) {
         FacesContext context = FacesContext.getCurrentInstance();  
         context.addMessage(null, new FacesMessage(mensaje));  
-    }
-
-    public Contacto getContacto() {
-        return contacto;
     }
 
     public void setContacto(Contacto contacto) {
