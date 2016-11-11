@@ -28,11 +28,13 @@
                     <p:ajax event="rowEdit" listener="#{contactoBean.modificarContacto}" update=":form:msg"/>
                     <p:ajax event="rowEdit" listener="#{contactoBean.cancelarModificarContacto}" update=":form:msg"/>
                     
-                    <p:column headerText="Id" style="text-align: center" width="20">
+                    <p:column headerText="Id" style="text-align: center" 
+                              filterBy="#{contacto.id}" filterMatchMode="exact">
                         <h:outputText value="#{contacto.id}"/>
                     </p:column>
                     
-                    <p:column headerText="Nombre" style="text-align: center">
+                    <p:column headerText="Nombre" style="text-align: center"
+                              filterBy="#{contacto.nombre}" filterMatchMode="contains">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{contacto.nombre}"/>
@@ -43,7 +45,8 @@
                         </p:cellEditor>
                     </p:column>
 
-                    <p:column headerText="Apellido" style="text-align: center">
+                    <p:column headerText="Apellido" style="text-align: center" 
+                              filterBy="#{contacto.apellido}" filterMatchMode="contains">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{contacto.apellido}"/>
@@ -54,7 +57,8 @@
                         </p:cellEditor>
                     </p:column>
 
-                    <p:column headerText="Username" style="text-align: center">
+                    <p:column headerText="Username" style="text-align: center"
+                              filterBy="#{contacto.username}" filterMatchMode="contains">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{contacto.username}"/>
@@ -65,7 +69,8 @@
                         </p:cellEditor>
                     </p:column>
                     
-                    <p:column headerText="Email" style="text-align: center" rendered="true">
+                    <p:column headerText="Email" style="text-align: center" rendered="true"
+                              filterBy="#{contacto.email}" filterMatchMode="contains">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{contacto.email}"/>
@@ -76,7 +81,8 @@
                         </p:cellEditor>
                     </p:column>
                     
-                    <p:column headerText="Dirección" style="text-align: center">
+                    <p:column headerText="Dirección" style="text-align: center"
+                              filterBy="#{contacto.direccion}" filterMatchMode="contains">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{contacto.direccion}"/>
@@ -87,7 +93,8 @@
                         </p:cellEditor>
                     </p:column>
                     
-                    <p:column headerText="Telefono" style="text-align: center">
+                    <p:column headerText="Telefono" style="text-align: center"
+                              filterBy="#{contacto.telefono}" filterMatchMode="contains">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{contacto.telefono}"/>
@@ -103,11 +110,11 @@
                     </p:column>
                     
                     <p:column width="20">
-                        <p:rowEditor/>
+                        <p:rowEditor editTitle="Modificar Contacto"/>
                     </p:column>
                     
                     <p:column style="text-align: center" width="40">               
-                        <p:commandButton icon="ui-icon-close" title="remove from cart" 
+                        <p:commandButton icon="ui-icon-close" title="eliminar contacto" 
                             actionListener="#{contactoBean.eliminarContacto(contacto)}" update="datatable">
                         </p:commandButton>
                     </p:column>

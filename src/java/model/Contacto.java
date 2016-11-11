@@ -39,6 +39,7 @@ public class Contacto {
     }
 
     public Contacto() {
+        this.fecha_creacion = getFechaActual();
     }
     
     

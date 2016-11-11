@@ -11,7 +11,6 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
 import model.Contacto;
 import org.primefaces.event.RowEditEvent;
@@ -36,9 +35,10 @@ public class ContactoBean implements Serializable {
     public ContactoBean() {
         //cargar lista de contactos
         //falta implementar
-         contactos.add(new Contacto(getUltimoId(),"Lilian","Galeano","@haideg.93","haideg.93@gmail.com","Ñemby","(71)666-567"));        
+        contactos.add(new Contacto(getUltimoId(),"Lilian","Galeano","@haideg.93","haideg.93@gmail.com","Ñemby","(71)666-567"));        
         contactos.add(new Contacto(getUltimoId(),"Fernando","Lopez","@ferpiece","flopez@gomail.com","San Lorenzo","(84)401-286"));       
         contactos.add(new Contacto(getUltimoId(),"Rodrigo","Benitez","@rbenitez94","rorobenm@gmail.com","Lambare","(82)166-858"));
+        contactos.add(new Contacto(getUltimoId(),"Nicolas","Lopez","@unloco","nichito93@gmail.com","San Lorenzo","(72)213-929"));
     }
     
     public void agregarContacto(){
@@ -131,8 +131,6 @@ public class ContactoBean implements Serializable {
     public void setContactoUpdate(Contacto contactoUpdate) {
         this.contactoUpdate = contactoUpdate;
     }
-
-    
-    
+ 
     
 }
