@@ -14,6 +14,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.Produces;
@@ -55,7 +57,7 @@ public class ContactoBean implements Serializable {
         return contacto;
     }
     
-    
+    @POST
     public void agregarContacto(){
         int id = getUltimoId();
         contacto.setId(id);
@@ -64,13 +66,15 @@ public class ContactoBean implements Serializable {
     }
     
     @DELETE
-    @Path("/delete/{idc}")
+    @Path("/delete/{idn}")
     public void eliminarContacto(@QueryParam("idc") Contacto contacto){
         String nombre = contacto.getNombre();
         contactos.remove(contacto);
         showMessage("Contacto " + nombre + " eliminado con exito!");
     }
     
+    @PUT
+    @Path("contacto/{nom}")
     public void modificarContacto(RowEditEvent event){
         //recupero el contacto a actualizar
         Contacto c = (Contacto) event.getObject();
